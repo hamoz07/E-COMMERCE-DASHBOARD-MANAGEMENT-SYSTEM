@@ -22,7 +22,7 @@ Welcome to our E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project prov
 - No Bootstrap, CSS-only styling
 - Google Sign-In and Sign-Up
 
-#Testing it
+#installation
 - you can't see the project on actual host or even locally becuase you have to download the backend files on your desktop, but you can see it in the below video
 
 

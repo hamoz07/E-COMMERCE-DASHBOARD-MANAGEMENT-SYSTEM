@@ -1,8 +1,28 @@
-# React + Vite
+# E-COMMERCE DASHBOARD MANAGEMENT SYSTEM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to our E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project provides a robust system for managing an e-commerce platform with multiple authentication methods, product management, user management, and category management. It is fully responsive and built using React and Vite, with pure CSS styling (no Bootstrap).
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authentication](#authentication)
+- [Product Management](#product-management)
+- [User Management](#user-management)
+- [Category Management](#category-management)
+- [Responsive Design](#responsive-design)
+- [Demo Video](#demo-video)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Multiple authentication methods
+- Create, view, and delete products
+- Create, view, and delete users
+- Create, view, and delete categories
+- Fully responsive design
+- No Bootstrap, CSS-only styling
+- Google Sign-In and Sign-Up
+
+#Testing it
+- you can't see the project on actual host or even locally becuase you have to download the backend files on your desktop, but you can see it in the below video
+
+

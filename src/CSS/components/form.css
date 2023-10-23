@@ -1,0 +1,93 @@
+.form {
+    background-image: linear-gradient(110deg, white 0%, white 50%, transparent 50%), url(/src/assets/form-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30rem;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+}
+
+h2{
+    color: #000;
+}
+
+.input-desc{
+    position: relative;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.input-desc label{
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    transition: .3s;
+    color:#1a1515f5;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Lato', sans-serif;
+}
+
+.input-desc label,
+.input-desc input{
+    display: block;
+}
+
+.input-desc input{
+    width: 40%;
+    padding: 7px 10px;
+    outline: 0;
+    transition: .5s;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgb(153, 153, 153) inset;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.input-desc input:focus:valid{
+    border-bottom:3px solid  rgb(18, 129, 18);
+}
+
+.input-desc input:focus{
+    box-shadow: 0px 0px 0px rgb(153, 153, 153) inset;
+}
+
+.input-desc input:focus:not(:valid){
+    border-bottom:3px solid  rgb(231, 160, 27);
+}
+
+.input-desc input:placeholder-shown + label{
+    top:0px;
+    visibility: 0;
+    opacity:0;
+}
+
+.form .noaccount_createOne{
+    margin: 20px 0 0 0;
+    position: relative;
+}
+
+.form .noaccount_createOne .gocreateone{
+    text-transform: lowercase;
+    font-size: 17px;
+    color: #44d1a2;
+    font-weight: 500;
+}
+
+.form .noaccount_createOne .gocreateone .creating{
+    color: rgb(28, 28, 141);
+    text-transform: lowercase;
+    font-weight: bold;
+    text-decoration: underline;
+}

@@ -1,0 +1,24 @@
+button{
+    background-color: rgb(28, 28, 141);
+    outline: 0;
+    border: 0;
+    border-radius:10px !important;
+    padding: 12px 18px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+button:hover{
+    opacity: .9;
+}
+
+button:focus{
+    outline: 3px solid rgb(28, 28, 141);
+    outline-offset: 3px;
+    opacity: .9;
+}

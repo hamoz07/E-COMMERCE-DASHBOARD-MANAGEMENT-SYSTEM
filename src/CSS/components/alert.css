@@ -1,0 +1,31 @@
+.error{
+    
+    background: #f8d7da;
+    color: #f00;
+    padding: 10px 190px 10px 10px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight:600 ;
+    animation: alert 1.5s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes alert {
+    0%{
+        opacity: 0;
+    }
+
+    30%{
+        opacity: .3;
+    }
+    50%{
+        opacity:.5 ;
+    }
+    70%{
+        opacity: .7;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}

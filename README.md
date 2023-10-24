@@ -13,7 +13,7 @@ Welcome to our E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project prov
 - [Responsive Design](#responsive-design)
 - [Demo Video](#demo-video)
 
-## Features
+#features
 - Multiple authentication methods
 - Create, view, and delete products
 - Create, view, and delete users
@@ -26,3 +26,8 @@ Welcome to our E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project prov
 - you can't see the project on actual host or even locally becuase you have to download the backend files on your desktop, but you can see it in the below video
 
 
+https://github.com/hamoz07/E-COMMERCE-DASHBOARD-MANAGEMENT-SYSTEM/assets/112629005/aa14ab22-f531-41c5-95ef-7305997f44ce
+
+
+#responsive-design
+  - you can see through the video the whole website is responsive

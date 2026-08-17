@@ -14,6 +14,10 @@ Welcome to my E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project provi
 - [Responsive Design](#responsive-design)
 - [Demo Video](#demo-video)
 
+# demo-video
+
+https://github.com/hamoz07/E-COMMERCE-DASHBOARD-MANAGEMENT-SYSTEM/assets/112629005/aa14ab22-f531-41c5-95ef-7305997f44ce
+
 # features
 - Multiple authentication methods
 - Create, view, and delete products
@@ -22,11 +26,6 @@ Welcome to my E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project provi
 - Fully responsive design
 - No Bootstrap, CSS-only styling
 - Google Sign-In and Sign-Up
-
-# installation
-- you can't see the project on actual host or even locally becuase you have to download the backend files on your desktop, but you can see it in the below video
-
-
 
 # usage
   - admin dashboard made with complete authentication process, checking user authorization state, multiple authentication (user,product manager,admin), managing  users, managing products, managing categories,
@@ -65,7 +64,5 @@ Welcome to my E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project provi
 # responsive-design
   - you can see through the video the whole website is responsive
 
-
-# demo-video
-
-https://github.com/hamoz07/E-COMMERCE-DASHBOARD-MANAGEMENT-SYSTEM/assets/112629005/aa14ab22-f531-41c5-95ef-7305997f44ce
+# installation
+- you can't see the project on actual host or even locally becuase you have to download the backend files on your desktop, but you can see it in the below video

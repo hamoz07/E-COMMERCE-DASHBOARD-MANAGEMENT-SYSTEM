@@ -12,11 +12,6 @@ Welcome to my E-COMMERCE DASHBOARD MANAGEMENT SYSTEM project. This project provi
 - [User Management](#user-management)
 - [Category Management](#category-management)
 - [Responsive Design](#responsive-design)
-- [Demo Video](#demo-video)
-
-# demo-video
-
-https://github.com/hamoz07/E-COMMERCE-DASHBOARD-MANAGEMENT-SYSTEM/assets/112629005/aa14ab22-f531-41c5-95ef-7305997f44ce
 
 # features
 - Multiple authentication methods

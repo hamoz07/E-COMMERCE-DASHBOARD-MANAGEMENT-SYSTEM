@@ -17,6 +17,8 @@ const WindowContext = ({children}) => {
             }
         },[])
 
+console.log(windowStroke)
+
   return (
     <WINContexter.Provider value={{windowStroke,setWindowStroke}}>{children}</WINContexter.Provider>
   )

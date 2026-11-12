@@ -1,0 +1,47 @@
+.dashboard{
+    background-color: var(--app-background);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.posi-rel{
+    position: relative;
+}
+
+.progress-bar{
+    background-color: var(--surface-muted);
+    width: 100%;
+    height: 9px;
+    margin-top: 24px;
+    display: block;
+    border-radius: 10px;
+}
+
+.progress-bar .actual-prog{
+    position: relative;
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 0%;
+    display: block;
+    border-radius: 10px;
+    transition: .5s;
+    
+}
+.img-details{
+    position: relative;
+}
+
+.delIcon{
+    margin-top: 30px;
+}
+.delIcon svg{
+    color: rgb(227, 87, 87);
+    font-size: 21px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.delIcon svg:hover{
+    color: rgb(159, 11, 11);
+    transform: scale(1.1);
+}

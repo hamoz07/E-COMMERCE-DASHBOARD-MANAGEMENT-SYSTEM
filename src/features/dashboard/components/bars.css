@@ -1,0 +1,121 @@
+.top-bar {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--surface-background);
+    box-shadow:  0 0 4px 0 var(--shadow-color);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.side-bar {
+    top: 70px;
+    left: 0;
+    background-color: var(--surface-background);
+    overflow-y: hidden;
+    overflow-x: visible;
+    min-height: 100vh;
+    box-shadow:  0 0 4px 0 var(--shadow-color);
+    z-index: 32324;
+    padding: 15px 20px;
+    transition: .5s;
+}
+
+.side-bar-link{
+    border-radius: 15px;
+}
+
+.side-bar-link p{
+    color: var(--text-muted);
+    transition: .5s;
+}
+
+.side-bar-link:hover{
+    color: var(--text-color);
+    background-color: var(--dashboard-hover);
+}
+
+ .side-bar-link:hover p{
+    color: var(--text-color);
+}
+
+.closed {
+    background-color: rgba(164, 161, 161, 0.75);
+    position: absolute;
+    left: 22px;
+    color: var(--text-color);
+    border-radius: 7px;
+    padding: 4px 5px;
+    display: none;
+    transition: .3s;
+    z-index: 99999999999;
+    font-size: 13px;
+}
+
+.closed-users{
+    top: 50px;
+}
+.side-bar-link:hover + .closed-users{
+    display: block !important;
+}
+.closed-create-user{
+    top: 98px;
+}
+.side-bar-link:hover + .closed-create-user{
+    display: block !important;
+}
+.closed-categories{
+    top: 146px;
+    font-size: 11px !important;
+}
+.side-bar-link:hover + .closed-categories{
+    display: block !important;
+}
+.closed-create-category{
+    top: 194px;
+    font-size: 11px !important;
+    padding: 3px 2px !important;
+    left: 16px;
+}
+.side-bar-link:hover + .closed-create-category{
+    display: block !important;
+}
+.closed-products{
+    top: 242px;
+}
+.side-bar-link:hover + .closed-products{
+    display: block !important;
+}
+.closed-create-product{
+    top: 290px ;
+}
+.side-bar-link:hover + .closed-create-product{
+    display: block !important;
+}
+/* .side-bar-link:hover + .closed {
+    display: block;
+} */
+
+.active{
+    background-color: var(--dashboard-hover);
+}
+
+.active p{
+    color: var(--primary-color);
+}
+
+.side-bar h6{
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    font-size: 13px;
+    margin-bottom: 20px ;
+}
+
+.top-bar h3{
+    font-size: 23px;
+    color: var(--dashboard-heading);
+}

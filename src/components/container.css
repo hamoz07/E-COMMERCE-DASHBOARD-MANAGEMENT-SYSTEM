@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+  
+.container {
+    width: 50vw;
+    margin: 15vh auto;
+    padding: 5vw 3vw 3vw 5vw;
+    background-color: coral;
+    border-radius: 2vw;
+}

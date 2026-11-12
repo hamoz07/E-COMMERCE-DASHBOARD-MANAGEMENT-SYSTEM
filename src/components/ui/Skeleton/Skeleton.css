@@ -1,0 +1,17 @@
+@keyframes skeleton-pulse {
+  0% {
+    background-color: var(--surface-muted);
+  }
+  50% {
+    background-color: var(--border-color);
+  }
+  100% {
+    background-color: var(--surface-muted);
+  }
+}
+
+.skeleton {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  display: inline-block;
+  background-color: var(--surface-muted);
+}

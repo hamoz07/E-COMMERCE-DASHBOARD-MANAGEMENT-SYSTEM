@@ -1,0 +1,40 @@
+.Pagination__holder {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    color: var(--primary-color);
+    background-color: var(--surface-muted);
+    width: fit-content;
+    margin: 20px auto;
+    padding: 5px 41px;
+    border-radius: 15px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: "Roboto";
+    font-weight: bold;
+}
+
+.Pagination__holder_li {
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    padding: 0 10px;
+    background: var(--surface-background);
+    transition: all .5s ease;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.Pagination__holder_li:hover {
+    background: var(--surface-muted);
+    color: var(--primary-hover);
+}
+
+.Pagination__holder_li--active {
+    background: var(--surface-muted);
+    color: var(--success-color);
+}
+
+.Pagination__holder_li a {
+    color: var(--primary-color);
+}

@@ -1,3 +1,4 @@
+
 *:not(input, tbody) {
   text-transform: capitalize;
 }
@@ -41,18 +42,20 @@ a {
 }
 
 .error {
-  color: red;
+  color: var(--danger-text);
   font-size: 17px;
   margin-top: 7px;
 }
 
-.error-noitems {
-  color: #DEF;
-  background-color: #9c9b9b;
-  padding: 5px 10px;
-  font-size: 19px;
-  border-radius: 10px;
-  font-weight: 800;
+tr .error-noitems {
+  color: var(--text-color) !important;
+  background-color: var(--surface-muted) !important;
+  padding: 5px 10px !important;
+  font-size: 19px !important;
+  border-radius: 10px !important;
+  font-weight: 800 !important;
+  display: block !important;
+  margin-top: 5px !important;
 }
 
 .container {
@@ -68,8 +71,6 @@ a {
 :root {
   --primary-color: #faca2e;
   --eye-pupil-color: #050505;
-  --bg-color: #fff;
-  --text-color: #000;
   --fs-heading: 36px;
   --fs-text: 26px;
   --fs-button: 18px;
@@ -134,7 +135,7 @@ a {
 .error-page__button:hover {
   box-shadow: none;
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--surface-background);
 }
 
 .eyes {
@@ -199,4 +200,59 @@ a {
   cursor: pointer;
   color: var(--primary-color);
   border: 0;
+}
+.search_bar{
+  width: fit-content !important;
+  border: 2px solid var(--primary-color) !important;
+  caret-color: var(--primary-color);
+  color: var(--text-color) !important;
+}
+.nav-logo{
+  mix-blend-mode: difference;
+  width: 90px;
+  border-radius: 50%;
+  height: 90px;
+}
+.b-10{
+  border-radius: 15px !important;
+}
+.profile{
+  mix-blend-mode: hard-light;
+  width: 60px;
+  height: 40px;
+}
+.main-home-navbar{
+  box-shadow: 0px -3px 7px var(--shadow-color);
+}
+.category-naver{
+  cursor: pointer;
+  color: var(--text-color);
+  transform: scale(1.0);
+  font-size: 14px;
+  font-family: ui-monospace;
+  transition: .3s all;
+  margin-left: 20px;
+}
+
+.category-naver:hover{
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+.cat-title{
+  transition: .3s all;
+  font-family: ui-monospace;
+  font-size: 14px;
+  margin-left: 20px;
+}
+.cat-title:hover{
+  color: var(--primary-color) !important;
+}
+.custom-search{
+  color: var(--text-muted) !important;
+  background-color: var(--input-background) !important;
+}
+.custom-search:focus{
+ box-shadow: 0 0 10px 0 var(--shadow-color);
+ border-color: var(--border-color) !important;
+ outline-color: var(--border-color) !important;
 }

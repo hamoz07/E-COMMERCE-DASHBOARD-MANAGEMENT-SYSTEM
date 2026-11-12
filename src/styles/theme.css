@@ -1,0 +1,94 @@
+:root {
+  color-scheme: light;
+
+  --app-background: #ffffff;
+  --surface-background: #ffffff;
+  --surface-muted: #f5f6fa;
+
+  --text-color: #202020;
+  --text-muted: #777777;
+  --text-subtle: #888888;
+
+  --border-color: #e8e8e8;
+  --input-background: #ffffff;
+
+  --primary-color: #1c1c8d;
+  --primary-hover: #15156d;
+  --on-primary: #ffffff;
+  --success-color: #198754;
+
+  --dashboard-hover: #f2f3fe;
+  --dashboard-heading: #394049;
+
+  --shadow-color: rgb(0 0 0 / 20%);
+
+  --danger-background: #f8d7da;
+  --danger-text: #842029;
+  --success-background: #d1e7dd;
+  --success-text: #0f5132;
+  --warning-background: #fff3cd;
+  --warning-text: #664d03;
+  --info-background: #cff4fc;
+  --info-text: #055160;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --app-background: #121212;
+  --surface-background: #1e1e1e;
+  --surface-muted: #272727;
+
+  --text-color: #f1f1f1;
+  --text-muted: #b6b6b6;
+  --text-subtle: #999999;
+
+  --border-color: #3a3a3a;
+  --input-background: #292929;
+
+  --primary-color: #8585ff;
+  --primary-hover: #a0a0ff;
+  --on-primary: #121212;
+  --success-color: #75d69c;
+
+  --dashboard-hover: #30304a;
+  --dashboard-heading: #eeeeee;
+
+  --shadow-color: rgb(0 0 0 / 55%);
+
+  --danger-background: #4a2026;
+  --danger-text: #f5c2c7;
+  --success-background: #193c2d;
+  --success-text: #a3cfbb;
+  --warning-background: #4a3b10;
+  --warning-text: #ffe69c;
+  --info-background: #123d45;
+  --info-text: #9eeaf9;
+
+  --bs-body-bg: var(--app-background);
+  --bs-body-color: var(--text-color);
+  --bs-emphasis-color: var(--text-color);
+  --bs-secondary-color: var(--text-muted);
+  --bs-secondary-bg: var(--surface-muted);
+  --bs-border-color: var(--border-color);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--app-background);
+  color: var(--text-color);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.app-surface {
+  background-color: var(--surface-background);
+  color: var(--text-color);
+  border-color: var(--border-color) !important;
+}

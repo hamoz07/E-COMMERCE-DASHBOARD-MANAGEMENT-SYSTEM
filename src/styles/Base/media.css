@@ -1,0 +1,33 @@
+/** min 768px */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/** min 992px */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/** min 1200px */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/** max 678px */
+@media (max-width:678px) {
+    .input-desc input{
+        width: 95%;
+    }
+    .form{
+        background-image: linear-gradient(color-mix(in srgb, var(--surface-background) 50%, transparent) 0%, color-mix(in srgb, var(--surface-background) 50%, transparent) 100%), url(/src/assets/form-bg.jpg);
+    }
+    .error{
+        padding: 10px;
+    }
+}

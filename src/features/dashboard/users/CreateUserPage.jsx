@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
+// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 // rrd
 import { useNavigate } from "react-router-dom";
 //  libraries

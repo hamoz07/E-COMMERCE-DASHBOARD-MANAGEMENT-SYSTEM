@@ -1,6 +1,7 @@
 import { faStar as solid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./star-rating.css";
 
 
 export const StarRating = ({ rating = 0 }) => {

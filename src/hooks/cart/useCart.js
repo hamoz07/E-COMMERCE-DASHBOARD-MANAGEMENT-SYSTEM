@@ -37,6 +37,7 @@ const useCart = () => {
     queryKey: ["cartProducts", itemsIds],
     queryFn: () => fetchProductsByItems(itemsIds),
     enabled: !authenticated && itemsIds.length > 0,
+    staleTime: 5 * 60 * 1000,
   });
 
   const {
@@ -284,6 +285,9 @@ const useCart = () => {
         quantity: items[product.id],
         cartId: cartItem(product.id)?.id,
       }));
+
+
+      console.log(products)
 
   return {
     loading: authenticated

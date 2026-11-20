@@ -24,7 +24,7 @@ const CartItemList = ({
     />
   ));
 
-  return <div>{renderList}</div>;
+  return <div className="cart-item-list">{renderList}</div>;
 };
 
 export default CartItemList;

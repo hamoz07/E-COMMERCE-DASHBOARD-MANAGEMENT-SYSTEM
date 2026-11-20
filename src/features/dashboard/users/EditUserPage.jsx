@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
-// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
+// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 // rrd
 import { useNavigate, useParams } from "react-router-dom";
 //  libraries

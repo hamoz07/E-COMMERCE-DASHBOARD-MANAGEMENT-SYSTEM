@@ -34,3 +34,9 @@ export const table_columns  = {
     { key: "created_at", name: "created" },
     { key: "updated_at", name: "updated" },]
 }
+
+export const lookupKeys= {
+  users:["name","email","role"],
+  products:["title","price","rating","description"],
+  categories:['title']
+}

@@ -30,6 +30,20 @@
   --warning-text: #664d03;
   --info-background: #cff4fc;
   --info-text: #055160;
+
+  --bs-body-bg: var(--app-background);
+  --bs-body-color: var(--text-color);
+  --bs-emphasis-color: var(--text-color);
+  --bs-secondary-color: var(--text-muted);
+  --bs-secondary-bg: var(--surface-muted);
+  --bs-tertiary-bg: var(--surface-background);
+  --bs-border-color: var(--border-color);
+  --bs-heading-color: var(--text-color);
+  --bs-link-color: var(--primary-color);
+  --bs-link-hover-color: var(--primary-hover);
+  --bs-form-control-bg: var(--input-background);
+  --bs-form-control-color: var(--text-color);
+  --bs-btn-close-filter: none;
 }
 
 :root[data-theme="dark"] {
@@ -65,12 +79,6 @@
   --info-background: #123d45;
   --info-text: #9eeaf9;
 
-  --bs-body-bg: var(--app-background);
-  --bs-body-color: var(--text-color);
-  --bs-emphasis-color: var(--text-color);
-  --bs-secondary-color: var(--text-muted);
-  --bs-secondary-bg: var(--surface-muted);
-  --bs-border-color: var(--border-color);
 }
 
 html,
@@ -91,4 +99,64 @@ body {
   background-color: var(--surface-background);
   color: var(--text-color);
   border-color: var(--border-color) !important;
+}
+
+.card,
+.modal-content,
+.dropdown-menu {
+  color: var(--text-color);
+  background-color: var(--surface-background);
+  border-color: var(--border-color);
+}
+
+.form-control,
+.form-select {
+  color: var(--text-color);
+  background-color: var(--input-background);
+  border-color: var(--border-color);
+}
+
+.form-control:focus,
+.form-select:focus {
+  color: var(--text-color);
+  background-color: var(--input-background);
+  border-color: var(--primary-color);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.dropdown-item {
+  color: var(--text-color);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--text-color);
+  background-color: var(--dashboard-hover);
+}
+
+.btn-close {
+  filter: var(--bs-btn-close-filter);
+}
+
+.table {
+  --bs-table-color: var(--text-color);
+  --bs-table-bg: var(--surface-background);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-striped-color: var(--text-color);
+  --bs-table-striped-bg: var(--surface-muted);
+  --bs-table-hover-color: var(--text-color);
+  --bs-table-hover-bg: var(--dashboard-hover);
+}
+
+.table-theme-header {
+  color: var(--on-primary);
+  background-color: var(--primary-color);
+}
+
+:root[data-theme="dark"] {
+  --bs-btn-close-filter: invert(1) grayscale(100%) brightness(200%);
 }

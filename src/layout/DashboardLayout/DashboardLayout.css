@@ -35,13 +35,13 @@
     margin-top: 30px;
 }
 .delIcon svg{
-    color: rgb(227, 87, 87);
+    color: var(--danger-text);
     font-size: 21px;
     transition: .3s;
     cursor: pointer;
 }
 
 .delIcon svg:hover{
-    color: rgb(159, 11, 11);
+    color: var(--danger-text);
     transform: scale(1.1);
 }

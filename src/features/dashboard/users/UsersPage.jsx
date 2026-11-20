@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { AX } from "../../../api/client.js";
-import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
 import { CONACT } from "../../../context/context.jsx";
 import { WINContexter } from "../../../context/WindowContext";
 import Table from "../components/Table.jsx";
@@ -22,10 +21,10 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [myLimit, setMyLimit] = useState(5);
   const [myCurrentPage, setMyCurrentPage] = useState(1);
-  const [userLoading, setUserLoading] = useState(false);
+  const [userLoading, setUserLoading] = useState(true);
+  const [userError, setUserError] = useState("");
   const [total, setTotal] = useState(0);
-  const [checkItems, setCheckItems] = useState(false);
-const { currentUser } = useCurrentUser();
+  const { currentUser } = useCurrentUser();
   async function deleteUser(id) {
     try {
     await AX.delete(`/${ONEUSERREQ}/${id}`);
@@ -57,22 +56,24 @@ const { currentUser } = useCurrentUser();
     const controller = new AbortController();
     const runProds = async () => {
       setUserLoading(true);
+      setUserError("");
       try {
         const res = await AX.get(
           `/${USERSREQ}?limit=${myLimit}&page=${myCurrentPage}`,
           { signal: controller.signal }
         );
-        const data = res.data;
-        setUsers(data.data || []);
-        setTotal(data.total || 0);
-        setCheckItems(data.length === 0);
+        const userList = res.data.data || [];
+        setUsers(userList);
+        setTotal(res.data.total || 0);
       } catch (err) {
         if (err.name !== "CanceledError" && err.name !== "AbortError") {
           console.error("Failed to fetch products:", err);
-          throw new Error(axiosErrorHandler(err) || "something wrong happened");
+          setUserError(axiosErrorHandler(err) || "Unable to load users.");
         }
       } finally {
-        setUserLoading(false);
+        if (!controller.signal.aborted) {
+          setUserLoading(false);
+        }
       }
     };
 
@@ -92,30 +93,21 @@ const { currentUser } = useCurrentUser();
           Create user
         </Link>
       </div>
-      {users.length === 0  && !checkItems ? (
-        <LoadingPage
-
-          mt="130px"
-          mh={"60vh"}
-        />
-      ) : users.length === 0 && checkItems ? (
-        <span className="error-noitems">no users found</span>
-      ) : (
-        <Table
-          header={table_columns["users"]}
-          data={users}
-          currentUser={currentUser}
-          delUser={deleteUser}
-          limit={myLimit}
-          page={myCurrentPage}
-          setMyCurrentPage={setMyCurrentPage}
-          setLimit={setMyLimit}
-          loading={userLoading}
-          total={total}
-          searchLink={ONEUSERREQ}
-          foundType="users"
-        />
-      )}
+      <Table
+        header={table_columns["users"]}
+        data={users}
+        currentUser={currentUser}
+        delUser={deleteUser}
+        limit={myLimit}
+        page={myCurrentPage}
+        setMyCurrentPage={setMyCurrentPage}
+        setLimit={setMyLimit}
+        loading={userLoading}
+        error={userError}
+        total={total}
+        searchLink={ONEUSERREQ}
+        foundType="users"
+      />
     </div>
   );
 };

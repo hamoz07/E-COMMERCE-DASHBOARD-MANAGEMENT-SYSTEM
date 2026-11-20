@@ -11,6 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCurrentUser } from "../../../context/currentUserContext.jsx";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToast } from "../../../store/toasts/toastSlice";
+import ThemeToggle from "../../../components/ui/ThemeToggle/ThemeToggle.jsx";
 
 const TopBar = () => {
   const { setOpen } = useContext(CONACT);
@@ -70,9 +71,12 @@ useEffect(() => {
           icon={faBars}
         />
       </div>
-      <DropdownButton title={name}>
-        <Dropdown.Item onClick={logout}>logout</Dropdown.Item>
-      </DropdownButton>
+      <div className="d-flex align-items-center gap-3">
+        <ThemeToggle />
+        <DropdownButton title={name}>
+          <Dropdown.Item onClick={logout}>logout</Dropdown.Item>
+        </DropdownButton>
+      </div>
     </div>
   );
 };

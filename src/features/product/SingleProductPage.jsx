@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { lazy, Suspense, useMemo } from "react";
+import { Link, useParams } from "react-router-dom";
 
-import ImageGallery from "react-image-gallery";
+const ImageGallery = lazy(() => import("react-image-gallery"));
 import {
   faPlusSquare,
   faMinusSquare,
@@ -9,14 +9,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SingleProductPage.css";
 import { StarRating } from "../../components/ui/StarRating/StarRating.jsx";
-import { Field } from "../../components/ui/Field/Field.jsx";
-
+import { Field } from "../../components/skeletons/FieldSkeleton.jsx";
 import Button from "../../components/ui/Button/Button.jsx";
 import useAddToCart from "../../hooks/cart/useAddToCart.js";
+import useGetCategories from "../../hooks/categories/useGetCategories.js";
 
 const SingleProduct = () => {
-  // states
-
   // route anfs storing
   const { id } = useParams();
   // handlers
@@ -33,6 +31,16 @@ const SingleProduct = () => {
     increment,
     decrement,
   } = useAddToCart(id);
+  const { data: categories = [], isLoading: categoriesLoading } =
+    useGetCategories();
+
+  const prodcategory = useMemo(
+    () =>
+      categories.find(
+        (category) => String(category.id) === String(product?.category),
+      ),
+    [categories, product?.category],
+  );
 
   const images = useMemo(
     () =>
@@ -51,6 +59,10 @@ const SingleProduct = () => {
     [product?.images, product?.title],
   );
 
+   const isOnSale = useMemo(() => {
+    return Number(product?.discount) > 0 && Number(product?.price) > 0;
+  }, [product?.discount, product?.price]);
+
   if (productError) {
     return (
       <main className="single-product">
@@ -59,20 +71,15 @@ const SingleProduct = () => {
     );
   }
 
+ 
+
   return (
     <>
       <main className="single-product">
         <nav className="single-product__breadcrumb" aria-label="Breadcrumb">
-          {/* {myLoading ? (
-            <Skeleton width="100px" height="14px" borderRadius="4px" />
-          ) : (
-            <>
-              <span>Home / Category / </span>{" "}
-              <strong>{product?.title ?? "Sample Product Title"}</strong>
-            </>
-          )} */}
-          <Field loading={myLoading} width="100px" height="14px">
-            <span>Home / Category / </span>{" "}
+         
+          <Field loading={myLoading || categoriesLoading} width="100px" height="14px">
+            <span>Home / <Link to={`/products?category=${prodcategory?.id}`}><span className="text-decoration-underline">{prodcategory?.title ?? "Category"}</span></Link> / </span>{" "}
             <strong>{product?.title ?? "Sample Product Title"}</strong>
           </Field>
         </nav>
@@ -80,13 +87,23 @@ const SingleProduct = () => {
         <section className="single-product__content">
           <Field width="100%" height="539px" loading={myLoading}>
             <div className="single-product__media">
-              {Number(product?.discount) &&
-                Number(product?.discount) > 0 &&
-                Number(product?.discount) < Number(product?.price) && (
-                  <span className="single-product__sale">Sale!</span>
-                )}
+              {isOnSale && (
+                <span className="single-product__sale">Sale!</span>
+              )}
               {images.length ? (
-                <ImageGallery items={images} showPlayButton={false} />
+                <Suspense
+                  fallback={
+                    <div
+                      className="single-product__empty-media"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      Loading product images...
+                    </div>
+                  }
+                >
+                  <ImageGallery items={images} showPlayButton={false} />
+                </Suspense>
               ) : (
                 <div className="single-product__empty-media">
                   No product images
@@ -109,8 +126,10 @@ const SingleProduct = () => {
                 <span className="single-product__reviews">
                   (3 customer reviews)
                 </span>
-                <span className="single-product__info-dot">i</span>
-                <span className="single-product__stock">
+                <span className={`single-product__info-dot ${availableToAdd <= 3 && "text-danger-emphasis text-opacity-10 border-danger border-opacity-75"}`}>
+                  i
+                </span>
+                <span className={`single-product__stock ${availableToAdd <= 3 && "text-danger-emphasis text-opacity-10"}`}>
                   {availableToAdd < 1
                     ? " - Out of Stock"
                     : availableToAdd <= 3
@@ -140,11 +159,13 @@ const SingleProduct = () => {
             <dl className="single-product__meta">
               <div>
                 <dt>Category:</dt>
-                <Field loading={myLoading} width="100px" height="20px">
-                  <dd>{product?.category ?? "uncategorized"}</dd>
+                <Field loading={myLoading || categoriesLoading} width="100px" height="20px">
+                  <dd>{prodcategory?.title ?? "uncategorized"}</dd>
                 </Field>
               </div>
             </dl>
+          
+            {availableToAdd > 0 && (
             <div className="single-product__actions">
               <div className="single-product__quantity" aria-label="Quantity">
                 <Button
@@ -168,7 +189,7 @@ const SingleProduct = () => {
                   className={`${!product || (count >= availableToAdd && "opacity-50")}`}
                   aria-label={
                     !product || count >= availableToAdd
-                      ? "Cannot increase quantity, out of stock"
+                    ? "Cannot increase quantity, out of stock"
                       : "Increase quantity"
                   }
                   title={
@@ -197,6 +218,7 @@ const SingleProduct = () => {
                     : "Add to Cart"}
               </Button>
             </div>
+                )}
             {cartError && (
               <p className="single-product__cart-error" role="alert">
                 {cartError}

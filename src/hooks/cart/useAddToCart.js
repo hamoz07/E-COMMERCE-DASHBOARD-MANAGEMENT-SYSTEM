@@ -10,7 +10,7 @@ import { useProduct } from "../products/useProduct.js";
 import { AX } from "../../api/client.js";
 import { addToast } from "../../store/toasts/toastSlice";
 
-const useAddToCart = (prodId) => {
+const useAddToCart = (prodId, providedProduct = null) => {
   const [count, setCount] = useState(1);
   const [cartError, setCartError] = useState("");
 
@@ -26,11 +26,14 @@ const useAddToCart = (prodId) => {
     data: product,
     isLoading: productLoading,
     error: productError,
-  } = useProduct(prodId);
+  } = useProduct(prodId, !providedProduct);
+
+  const productData = providedProduct || product;
 
   const { data: cartItems = [], isLoading: isCartLoading } = useQuery({
     queryKey: ["cartItems", currentUser?.id],
     queryFn: async ({ signal }) => {
+      console.log("test")
       const response = await AX.get("/cart", { signal });
       return response.data;
     },
@@ -41,18 +44,22 @@ const useAddToCart = (prodId) => {
   const currentCartQuantity = authenticated
     ? Number(
         cartItems.find(
-          (item) => String(item.product_id) === String(product?.id),
+          (item) => String(item.product_id) === String(productData?.id),
         )?.count || 0,
       )
-    : Number(guestCartItems[product?.id] || 0);
+    : Number(guestCartItems[productData?.id] || 0);
 
-  const availableToAdd = product
-    ? Math.max(0, (Number(product.stock) || 0) - currentCartQuantity)
-    : null;
+  const availableToAdd =
+    productData && productData.stock != null
+      ? Math.max(0, Number(productData.stock) - currentCartQuantity)
+      : null;
+
+  const isCheckingAvailability =
+    productData?.stock == null || (authenticated && isCartLoading);
 
   const isDisabled =
-    !product ||
-    (authenticated && isCartLoading) ||
+    !productData ||
+    isCheckingAvailability ||
     availableToAdd < 1 ||
     addCartMutation.isPending;
 
@@ -71,7 +78,7 @@ const useAddToCart = (prodId) => {
 
   // main handler
   const addCartHandler = () => {
-    if (!product) return;
+    if (!productData) return;
 
     if (availableToAdd < 1 || count > availableToAdd) {
       dispatch(
@@ -93,12 +100,12 @@ const useAddToCart = (prodId) => {
     }
 
     if (!authenticated) {
-      dispatch(addToCart({ id: String(product.id), quantity: count }));
+      dispatch(addToCart({ id: String(productData.id), quantity: count }));
       dispatch(
         addToast({
           title: "Added to cart",
           type: "success",
-          message: `${product.title} was added to your cart.`,
+          message: `${productData.title} was added to your cart.`,
         }),
       );
       setCartError("");
@@ -108,14 +115,14 @@ const useAddToCart = (prodId) => {
     }
 
     addCartMutation.mutate(
-      { productId: product.id, count, product, userId: currentUser?.id },
+      { productId: productData.id, count, product: productData, userId: currentUser?.id },
       {
         onSuccess: () => {
           dispatch(
             addToast({
               title: "Added to cart",
               type: "success",
-              message: `${product.title} was added to your cart.`,
+              message: `${productData.title} was added to your cart.`,
             }),
           );
           setCartError("");
@@ -147,11 +154,12 @@ const useAddToCart = (prodId) => {
     count,
     cartError,
     // product data
-    product,
+    product: productData,
     productLoading,
     productError,
     // cart state
     availableToAdd,
+    isCheckingAvailability,
     isDisabled,
     isAdding: addCartMutation.isPending,
     // handlers

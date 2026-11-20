@@ -1,16 +1,15 @@
 import { memo } from "react";
 import PropTypes from "prop-types";
-// import ProductInfo from "../ProductInfo/ProductInfo";
 import { Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/ui/Button/Button.jsx";
-// import styles from "./styles.module.css";
-
-// const { cartItem, cartItemSelection } = styles;
 
 const CartItem = memo(
   ({
     id,
     title,
+    img,
     price,
     stock,
     quantity,
@@ -39,28 +38,37 @@ const CartItem = memo(
       changeQuantityHandler(id, quantity);
     };
 
+    // console.log("image",product?.image);
+
     return (
       <div
-      //   className={cartItem}
+        className="cart-item"
       >
-        {title} : {price}$
-        {/* <ProductInfo title={title} price={price} img={img} direction="column"> */}
-        <Button
-          variant="secondary"
-          type="button"
-          size="small"
-          style={{ color: "white", width: "100px" }}
-          className="mt-auto"
-          onClick={() => removeItemHandler(id)}
-          disabled={isItemMutationPending}
-        >
-          Remove
-        </Button>
-        {/* </ProductInfo> */}
-        <div
-        // className={cartItemSelection}
-        >
-          <span className="d-block mb-1">Quantity</span>
+        <div className="cart-item__details">
+          {img && (
+            <img
+              className="cart-item__image"
+              src={img}
+              alt={title || "Product"}
+              width={64}
+              height={64}
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <div className="cart-item__summary">
+            <h6 className="cart-item__title">{title}</h6>
+            <div className="cart-item__price">
+              ${Number(price || 0).toFixed(2)} each
+              <span aria-hidden="true"> • </span>
+              <strong>
+                ${(Number(price || 0) * Number(quantity || 0)).toFixed(2)}
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        <div className="cart-item__actions">
           {actionError && (
             <p role="alert" className="text-danger">
               {actionError.message}
@@ -69,6 +77,7 @@ const CartItem = memo(
           {availableStock > 0 ? (
             <>
               <Form.Select
+                className="cart-item__quantity"
                 value={quantity}
                 onChange={changeQuantity}
                 disabled={isItemMutationPending}
@@ -85,6 +94,18 @@ const CartItem = memo(
           ) : (
             <p role="alert">This product is out of stock.</p>
           )}
+          <Button
+            variant="icon"
+            type="button"
+            size="small"
+            iconOnly
+            ariaLabel={`Remove ${title || "product"} from cart`}
+            className="cart-item__remove"
+            onClick={() => removeItemHandler(id)}
+            disabled={isItemMutationPending}
+          >
+            <FontAwesomeIcon icon={faTrashCan} />
+          </Button>
         </div>
       </div>
     );
@@ -97,6 +118,7 @@ CartItem.displayName = "CartItem";
 CartItem.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string,
+  img: PropTypes.string,
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stock: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

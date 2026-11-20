@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
+// import { REGISTERREQ, baseURL } from "../../../api/endpoints.js";
 // rrd
 import { useNavigate, useParams } from "react-router-dom";
 //  libraries
@@ -202,7 +202,14 @@ const EditProduct = () => {
     return (
       <div className="p-2 col-2 position-relative border" key={i}>
         <div className="d-flex align-items-center justify-content-start">
-          <img src={img.image} id={img.id} className={"w-100"} alt={img.name} />
+          <img
+            src={img.image}
+            id={img.id}
+            className={"w-100"}
+            alt={img.name}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div className="position-absolute top-0 end-0 bg-danger rounded text-white">
           <Button

@@ -15,6 +15,7 @@ export const ONECAT = "category"
 
 
 export const PRODUCTS = "products"
+export const PRODUCT_SEARCH = "products/search"
 export const PROD = "product"
 export const SALEPROD = "latest-sale"
 export const TOPRATED = "top-rated"

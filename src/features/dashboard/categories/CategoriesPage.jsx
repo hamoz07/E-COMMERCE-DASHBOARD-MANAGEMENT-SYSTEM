@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { AX } from "../../../api/client.js";
-import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
 import { CONACT } from "../../../context/context.jsx";
 import { WINContexter } from "../../../context/WindowContext";
 import PaginatedItems from "../components/pagination/Pagination.jsx";
@@ -21,10 +20,10 @@ const Categories = () => {
   const { open } = useContext(CONACT);
   const { windowStroke } = useContext(WINContexter);
   const [categories, setCategories] = useState([]);
-  const [checkItems, setCheckItems] = useState(false);
   const [myLimit, setMyLimit] = useState(5);
   const [myCurrentPage, setMyCurrentPage] = useState(1);
-  const [catLoading, setCatLoading] = useState(false);
+  const [catLoading, setCatLoading] = useState(true);
+  const [catError, setCatError] = useState("");
   const [total, setTotal] = useState(0);
 
 
@@ -32,24 +31,24 @@ const Categories = () => {
       const controller = new AbortController();
       const runProds = async () => {
         setCatLoading(true);
+        setCatError("");
         try {
           const res = await AX.get(
             `/${CAT}?limit=${myLimit}&page=${myCurrentPage}`,
             { signal: controller.signal }
           );
   
-          const data = res.data;
-          setCategories(data.data || []);
-          setTotal(data.total || 0);
-          setCheckItems(data.length === 0);
+          setCategories(res.data.data || []);
+          setTotal(res.data.total || 0);
         } catch (err) {
           if (err.name !== "CanceledError" && err.name !== "AbortError") {
             console.error("Failed to fetch products:", err);
-            throw new Error(axiosErrorHandler(err) || "something wrong happened");
+            setCatError(axiosErrorHandler(err) || "Unable to load categories.");
           }
-          throw new Error("Request was aborted");
         } finally {
-          setCatLoading(false);
+          if (!controller.signal.aborted) {
+            setCatLoading(false);
+          }
         }
       };
   
@@ -96,28 +95,19 @@ const Categories = () => {
         </Link>
       </div>
      
-      {categories.length === 0 && !checkItems ? (
-        <LoadingPage
-
-          mt="130px"
-          mh={"60vh"}
-        />
-      ) : categories.length === 0 && checkItems ? (
-        <span className="error-noitems">no categories found</span>
-      ) : (
-        <Table
-          header={table_columns["categories"]}
-          data={categories}
-          delUser={deleteCategory}
-          limit={myLimit}
-          setMyCurrentPage={setMyCurrentPage} 
-          setLimit={setMyLimit}
-          total={total}
-          loading={catLoading}
-          searchLink={ONECAT}
-          foundType="categories"
-        />
-      )}
+      <Table
+        header={table_columns["categories"]}
+        data={categories}
+        delUser={deleteCategory}
+        limit={myLimit}
+        setMyCurrentPage={setMyCurrentPage}
+        setLimit={setMyLimit}
+        total={total}
+        loading={catLoading}
+        error={catError}
+        searchLink={ONECAT}
+        foundType="categories"
+      />
     
     </div>
   );

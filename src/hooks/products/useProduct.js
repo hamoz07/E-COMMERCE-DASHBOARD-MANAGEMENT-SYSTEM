@@ -11,9 +11,10 @@ export const getProduct = async ({ signal, queryKey }) => {
   return res.data[0];
 };
 
-export const useProduct = (id) =>
+export const useProduct = (id, enabled = true) =>
   useQuery({
     queryKey: ["product", String(id)],
     queryFn: getProduct, // TanStack passes { signal, queryKey } automatically
-    enabled: Boolean(id),
+    enabled: Boolean(id) && enabled,
+     staleTime: 5 * 60 * 1000,
   });

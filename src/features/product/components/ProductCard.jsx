@@ -6,15 +6,25 @@ import { Textreplacer } from "../../../utils/TextReplacer";
 import { NavLink } from "react-router-dom";
 import { StarRating } from "../../../components/ui/StarRating/StarRating.jsx";
 import useAddToCart from "../../../hooks/cart/useAddToCart.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const Product = (props) => {
-  const { addCartHandler, isDisabled, isAdding, cartError, availableToAdd } =
-    useAddToCart(props.id);
+  const {
+    addCartHandler,
+    isDisabled,
+    isAdding,
+    cartError,
+    availableToAdd,
+    isCheckingAvailability,
+  } = useAddToCart(props.id, props.product);
+
+  console.log(props.product , "props.product");
 
   return (
     <NavLink
       to={`/product/${props.id}`}
-      className={`col-lg-${props.size} col-md-6 col-12`}
+      className={`col-lg-${props.size} col-md-6 col-12 h-100`}
     >
       <Card className="h-100 shadow-sm border-1 rounded-3">
         <div
@@ -26,17 +36,17 @@ const Product = (props) => {
               sale
             </span>
           )}
-          {/* <Card.Img src={props.img} alt={`${props.title} image`} className="h-100 object-fit-contain p-3" /> */}
 
-          <div
-            className="h-100 object-fit-contain p-3"
+          <img
+            src={props.img}
+            alt={`${props.title} image`}
+            className="h-100 p-1"
+            loading="lazy"
+            decoding="async"
             style={{
-              backgroundImage: `url(${props.img})`,
-              backgroundSize: "cover",
+              width: "100%",
               height: "170px",
-              width: 200,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              objectFit: "cover",
             }}
           />
         </div>
@@ -46,7 +56,17 @@ const Product = (props) => {
             <Card.Subtitle className="mb-2 text-muted">
               {Textreplacer(props.title, 35)}
             </Card.Subtitle>
-            <Card.Text className="mb-3">{props.desc}</Card.Text>
+            <Card.Text
+              className="mb-3"
+              style={{
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }}
+            >
+              {props.desc}
+            </Card.Text>
           </div>
 
           <div>
@@ -72,13 +92,13 @@ const Product = (props) => {
                 e.preventDefault(); // prevent NavLink navigation on button click
                 addCartHandler();
               }}
-              leftIcon={<img src={ProdCart} alt="" width={24} height={24} />}
+              leftIcon={ <FontAwesomeIcon icon={faCartShopping}  />}
             >
-               {availableToAdd === null
-    ? "Loading..."
-    : availableToAdd < 1
-      ? "Out of Stock"
-      : "Add to Cart"}
+              {isCheckingAvailability
+                ? "Checking availability..."
+                : availableToAdd >= 1
+                  ? "Add to Cart"
+                  : "Out of Stock"}
             </Button>
 
             {cartError && (

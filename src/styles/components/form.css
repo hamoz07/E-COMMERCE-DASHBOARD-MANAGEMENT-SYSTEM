@@ -57,7 +57,7 @@ h2{
 }
 
 .input-desc input:focus:valid{
-    border-bottom:3px solid  rgb(18, 129, 18);
+    border-bottom:3px solid var(--success-color);
 }
 
 .input-desc input:focus{
@@ -65,7 +65,7 @@ h2{
 }
 
 .input-desc input:focus:not(:valid){
-    border-bottom:3px solid  rgb(231, 160, 27);
+    border-bottom:3px solid var(--warning-text);
 }
 
 .input-desc input:placeholder-shown + label{
@@ -82,7 +82,7 @@ h2{
 .form .noaccount_createOne .gocreateone{
     text-transform: lowercase;
     font-size: 17px;
-    color: #44d1a2;
+    color: var(--success-color);
     font-weight: 500;
 }
 

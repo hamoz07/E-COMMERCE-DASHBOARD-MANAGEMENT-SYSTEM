@@ -44,7 +44,8 @@
 }
 
 .closed {
-    background-color: rgba(164, 161, 161, 0.75);
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-color);
     position: absolute;
     left: 22px;
     color: var(--text-color);

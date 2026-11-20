@@ -23,6 +23,8 @@ const TableRow = memo(function TableRow({
               <img
                 key={src.id}
                 src={src.image}
+                loading="lazy"
+                decoding="async"
                 width={70}
                 height={70}
                 alt=""
@@ -35,6 +37,8 @@ const TableRow = memo(function TableRow({
           ) : head.key === "image" ? (
             <img
               src={item[head.key]}
+              loading="lazy"
+              decoding="async"
               width="100"
               alt=""
               style={{ objectFit: "contain" }}

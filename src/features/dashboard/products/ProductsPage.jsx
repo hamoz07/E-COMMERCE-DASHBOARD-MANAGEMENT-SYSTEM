@@ -13,8 +13,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { AX } from "../../../api/client.js";
 
-import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
-
 import { CONACT } from "../../../context/context.jsx";
 
 import { WINContexter } from "../../../context/WindowContext";
@@ -34,13 +32,12 @@ const Products = () => {
 
   const [products, setProducts] = useState([]);
 
-  const [checkItems, setCheckItems] = useState(false);
-
   const [myLimit, setMyLimit] = useState(5);
 
   const [myCurrentPage, setMyCurrentPage] = useState(1);
 
-  const [prodLoading, setProdLoading] = useState(false);
+  const [prodLoading, setProdLoading] = useState(true);
+  const [prodError, setProdError] = useState("");
 
   const [total, setTotal] = useState(0);
 
@@ -49,6 +46,7 @@ const Products = () => {
 
     const runProds = async () => {
       setProdLoading(true);
+      setProdError("");
 
       try {
         const res = await AX.get(
@@ -57,22 +55,18 @@ const Products = () => {
           { signal: controller.signal },
         );
 
-        const data = res.data;
-
-        setProducts(data.data || []);
-
-        setTotal(data.total || 0);
-
-        setCheckItems(data.length === 0);
+        setProducts(res.data.data || []);
+        setTotal(res.data.total || 0);
       } catch (err) {
         if (err.name !== "CanceledError" && err.name !== "AbortError") {
           console.error("Failed to fetch products:", err);
-
-          throw new Error(axiosErrorHandler(err) || "something wrong happened");
+          setProdError(axiosErrorHandler(err) || "Unable to load products.");
         }
 
       } finally {
-        setProdLoading(false);
+        if (!controller.signal.aborted) {
+          setProdLoading(false);
+        }
       }
     };
 
@@ -125,29 +119,20 @@ const Products = () => {
         </Link>
       </div>
 
-      {products.length === 0 && !checkItems ? (
-        <LoadingPage
-
-          mt="130px"
-          mh={"60vh"}
-        />
-      ) : products.length === 0 && checkItems ? (
-        <span className="error-noitems">no products found</span>
-      ) : (
-        <Table
-          header={table_columns["products"]}
-          data={products}
-          delUser={deleteUser}
-          limit={myLimit}
-          page={myCurrentPage}
-          setMyCurrentPage={setMyCurrentPage}
-          setLimit={setMyLimit}
-          loading={prodLoading}
-          total={total}
-          searchLink={PROD}
-          foundType="products"
-        />
-      )}
+      <Table
+        header={table_columns["products"]}
+        data={products}
+        delUser={deleteUser}
+        limit={myLimit}
+        page={myCurrentPage}
+        setMyCurrentPage={setMyCurrentPage}
+        setLimit={setMyLimit}
+        loading={prodLoading}
+        error={prodError}
+        total={total}
+        searchLink={PROD}
+        foundType="products"
+      />
     </div>
   );
 };

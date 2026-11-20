@@ -1,45 +1,41 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../assets/Modern Headphone Twitch Logo.png";
-import Profile from "../../../assets/810-8105516_blue-person-icon-blue-person-icon-png.png";
-import Cart from "../../../assets/cart.jpeg";
 import { Textreplacer } from "../../../utils/TextReplacer";
-import Skeleton from "../../../components/ui/Skeleton/Skeleton.jsx";
 import { WINContexter } from "../../../context/WindowContext.jsx";
 import useGetCategories from "../../../hooks/categories/useGetCategories.js";
-const CategoryChipSkeleton = ({ count = 8 }) => {
-  const widths = ["60px", "80px", "50px", "70px", "90px"];
+import ThemeToggle from "../../../components/ui/ThemeToggle/ThemeToggle.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+import { CategoryChipSkeleton } from "../../../components/skeletons/CategoryChipSkeleton.jsx";
+import SearchBar from "./SearchBar.jsx";
+import { ProductResults } from "../ProductsPage/ProductResults.jsx";
 
-  return Array.from({ length: count }).map((_, i) => (
-    <span
-      key={`cat-chip-skeleton-${i}`}
-      className="category-naver mb-0 d-inline-flex align-items-center"
-      style={{ padding: "0 8px" }}
-    >
-      <Skeleton
-        width={widths[i % widths.length]}
-        height="14px"
-        borderRadius="4px"
-      />
-    </span>
-  ));
-};
 
 const Navbar = () => {
+  const [query,setQuery] = useState("");
   const location = useLocation();
   const { pathname } = location;
   const { windowStroke } = useContext(WINContexter);
   const count = !windowStroke || windowStroke >= 968 ? 10 : 3;
   const { data: categories, isLoading: loading, isError: error } = useGetCategories();
-
+  const searchIntent = pathname === "/products" && query.trim() !== "";
   const isOnCategoriesPage = pathname === "/categories";
 
   const showAllCats = categories?.slice(0, count).map((cat) => (
-    <p key={cat.id} className="category-naver mb-0">
+    <Link
+      key={cat.id}
+      to={`/products?category=${cat.id}`}
+      className="category-naver mb-0 text-decoration-none"
+    >
       {Textreplacer(cat.title, 10)}
-    </p>
+    </Link>
   ));
+
+  // handling all changes functions
+  // onchange handler
+  // searching products filter returned from useMemo
 
   return (
     <div className="py-3 bg-transparent main-home-navbar">
@@ -50,26 +46,24 @@ const Navbar = () => {
           </Link>
 
           <div className="col-12 col-md-6 order-md-2 order-3 mt-md-0 mt-3 position-relative b-10">
-            <Form.Control
-              type="search"
-              className="form-control custom-search py-3 b-10"
-              placeholder="search product"
-            />
-            <h3 className="btn btn-primary position-absolute top-0 end-0 h-100 line-height m-0 px-4 d-flex align-items-center justify-content-center b-10">
-              Search
-            </h3>
+           <SearchBar query={query} setQuery={setQuery} />
           </div>
+          {/* {searchIntent &&
+          (<ProductResults response />)
+          } */}
 
-          <div className="col-3 d-flex align-items-center justify-content-end order-md-3 order-1">
+          <div className="col-3 d-flex align-items-center justify-content-end order-md-3 order-1 gap-2">
+            <ThemeToggle />
             <Link
               to="/cart"
               state={pathname === "/cart" ? undefined : { backgroundLocation: location }}
               aria-label="View cart"
             >
-              <img src={Cart} className="b-10 profile" alt="" />
+      <FontAwesomeIcon icon={faCartShopping} className="fs-4"  />
             </Link>
             <Link to="/profile" aria-label="View profile">
-              <img src={Profile} className="b-10 profile" alt="" />
+
+                    <FontAwesomeIcon icon={faUser} className="fs-4" />
             </Link>
           </div>
         </div>

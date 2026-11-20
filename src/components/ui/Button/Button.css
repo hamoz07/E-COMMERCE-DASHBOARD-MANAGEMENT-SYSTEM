@@ -53,21 +53,22 @@
 }
 
 .app-button--secondary {
-  background-color: #6c757d;
+  background-color: var(--surface-muted);
   color: var(--on-primary);
 }
 
 .app-button--secondary:hover:not(:disabled) {
-  background-color: #565e64;
+  background-color: var(--border-color);
 }
 
 .app-button--danger {
-  background-color: #dc3545;
+  background-color: var(--danger-text);
   color: var(--on-primary);
 }
 
 .app-button--danger:hover:not(:disabled) {
-  background-color: #b02a37;
+  background-color: var(--danger-background);
+  color: var(--danger-text);
 }
 
 .app-button--outline {

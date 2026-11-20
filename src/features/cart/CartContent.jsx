@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import useCart from "../../hooks/cart/useCart.js";
 import CartItemList from "./CartItemsList";
 import Button from "../../components/ui/Button/Button.jsx";
+import "./cart.css";
 
 const CartContent = ({ onCompleted }) => {
   const {
@@ -18,7 +19,11 @@ const CartContent = ({ onCompleted }) => {
   } = useCart();
 
   if (loading) {
-    return <p>Loading cart...</p>;
+    return (
+      <p role="status" >
+        Loading cart...
+      </p>
+    );
   }
 
   if (error) {
@@ -26,11 +31,16 @@ const CartContent = ({ onCompleted }) => {
   }
 
   if (products.length === 0) {
-    return <p>Your cart is empty.</p>;
+    return <p className="cart-content__empty">Your cart is empty.</p>;
   }
 
+  const totalAmount = products.reduce(
+    (sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0),
+    0,
+  );
+
   return (
-    <>
+    <div className="cart-content">
       {cartActionError?.id === null && (
         <p role="alert" className="text-danger">
           {cartActionError.message}
@@ -43,17 +53,23 @@ const CartContent = ({ onCompleted }) => {
         isCartItemMutationPending={isCartItemMutationPending}
         cartActionError={cartActionError}
       />
-      <Button
-        variant="danger"
-        type="button"
-        loading={isCartClearingPending}
-        loadingText="Clearing..."
-        onClick={() => clearCartHandler(onCompleted)}
-        disabled={isCartClearingPending || isCartMutationPending}
-      >
-        Clear cart
-      </Button>
-    </>
+      <div className="cart-content__footer">
+        <div className="cart-content__total">
+          <span>Total</span>
+          <strong>${totalAmount.toFixed(2)}</strong>
+        </div>
+        <Button
+          variant="danger"
+          type="button"
+          loading={isCartClearingPending}
+          loadingText="Clearing..."
+          onClick={() => clearCartHandler(onCompleted)}
+          disabled={isCartClearingPending || isCartMutationPending}
+        >
+          Clear Cart
+        </Button>
+      </div>
+    </div>
   );
 };
 

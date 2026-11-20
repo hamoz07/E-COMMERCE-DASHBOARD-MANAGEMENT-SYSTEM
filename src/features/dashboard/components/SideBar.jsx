@@ -24,7 +24,7 @@ const { currentUser, userLoading } = useCurrentUser();
       <div
         style={{
           position: "fixed",
-          background: "rgba(0,0,0,0.4)",
+          background: "var(--shadow-color)",
           width: "100%",
           top: "70px",
           minHeight: "100vh",

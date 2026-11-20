@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <WindowContext>
                 <ContextManager>
                   <RouteManager>
-                    <AppRouter />
+                    <AppRouter />  
                   </RouteManager>
                   <ToastList />
                 </ContextManager>

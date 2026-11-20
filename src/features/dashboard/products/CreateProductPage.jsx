@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
 import PropTypes from "prop-types";
 // pages
-import LoadingPage from "../../../components/feedback/LoadingPage.jsx";
 // rrd
 import { useNavigate } from "react-router-dom";
 //  libraries

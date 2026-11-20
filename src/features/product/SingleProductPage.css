@@ -101,22 +101,6 @@
   font-size: 14px;
 }
 
-.single-product__stars {
-  color: var(--text-color);
-  letter-spacing: 1px;
-}
-
-.single-product__star {
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--text-color);
-  letter-spacing: 1px;
-}
-
-.single-product__star--filled {
-  color: gold;
-}
-
 .single-product__reviews {
   color: var(--product-pink);
 }
@@ -197,12 +181,12 @@
 .single-product__quantity button,
 .single-product__quantity span {
     width: 31px;
+    height: fit-content;
     display: grid;
     place-items: center;
     text-align: center;
     border: 0;
-    background: var(--surface-background);
-    font-size: 18px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;

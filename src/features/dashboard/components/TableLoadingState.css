@@ -1,0 +1,29 @@
+.table-loading-cell {
+  height: 88px;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text-muted);
+}
+
+.table-loading-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.table-loading-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--surface-muted);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: table-loading-spin 0.8s linear infinite;
+}
+
+@keyframes table-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

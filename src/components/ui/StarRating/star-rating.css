@@ -1,0 +1,15 @@
+.single-product__stars {
+  color: var(--text-color);
+  letter-spacing: 1px;
+}
+
+.single-product__star {
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-color);
+  letter-spacing: 1px;
+}
+
+.single-product__star--filled {
+  color: gold;
+}

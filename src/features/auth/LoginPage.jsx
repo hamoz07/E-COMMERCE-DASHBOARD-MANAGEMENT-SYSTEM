@@ -17,6 +17,7 @@ import axiosErrorHandler from "../../utils/axiosErrorHandler";
 import { loginSchema } from "../../validations/loginSchema";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { clearCartAfterPlaceOrder } from "../../store/cart/cartSlice";
+import Image from "../../components/ui/Image/Image.jsx";
 import {
   createCartMergeIdempotencyKey,
   useMergeCartMutation,
@@ -140,7 +141,14 @@ const Login = () => {
             <div className="google-btn">
               <a href={`http://127.0.0.1:8000/login-google`}>
                 <div className="google-icon-holder">
-                  <img src={GOOGLEICON} alt="" />
+                  <Image
+                    src={GOOGLEICON}
+                    alt=""
+                    width={24}
+                    height={24}
+                    sizes="24px"
+                    objectFit="contain"
+                  />
                 </div>
                 <p className="btn-text">
                   <b>Sign in with google</b>

@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import { useContext } from "react";
+import { Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../assets/Modern Headphone Twitch Logo.png";
 import { Textreplacer } from "../../../utils/TextReplacer";
@@ -10,17 +10,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import { CategoryChipSkeleton } from "../../../components/skeletons/CategoryChipSkeleton.jsx";
 import SearchBar from "./SearchBar.jsx";
-import { ProductResults } from "../ProductsPage/ProductResults.jsx";
+import Image from "../../../components/ui/Image/Image.jsx";
 
 
 const Navbar = () => {
-  const [query,setQuery] = useState("");
   const location = useLocation();
   const { pathname } = location;
   const { windowStroke } = useContext(WINContexter);
   const count = !windowStroke || windowStroke >= 968 ? 10 : 3;
   const { data: categories, isLoading: loading, isError: error } = useGetCategories();
-  const searchIntent = pathname === "/products" && query.trim() !== "";
   const isOnCategoriesPage = pathname === "/categories";
 
   const showAllCats = categories?.slice(0, count).map((cat) => (
@@ -33,24 +31,25 @@ const Navbar = () => {
     </Link>
   ));
 
-  // handling all changes functions
-  // onchange handler
-  // searching products filter returned from useMemo
 
   return (
     <div className="py-3 bg-transparent main-home-navbar">
       <Container>
         <div className="d-flex align-items-center justify-content-center flex-wrap">
           <Link to="/" className="col-3">
-            <img src={Logo} alt="logo" width={100} height={100} className="nav-logo" />
+            <Image
+              src={Logo}
+              alt="Store logo"
+              width={100}
+              height={100}
+              className="nav-logo"
+              objectFit="contain"
+            />
           </Link>
 
           <div className="col-12 col-md-6 order-md-2 order-3 mt-md-0 mt-3 position-relative b-10">
-           <SearchBar query={query} setQuery={setQuery} />
+           <SearchBar />
           </div>
-          {/* {searchIntent &&
-          (<ProductResults response />)
-          } */}
 
           <div className="col-3 d-flex align-items-center justify-content-end order-md-3 order-1 gap-2">
             <ThemeToggle />

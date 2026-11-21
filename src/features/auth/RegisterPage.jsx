@@ -18,6 +18,7 @@ import {
   useMergeCartMutation,
 } from "../../hooks/cart/useMergeCart.js";
 import { getGuestCartItems } from "../../utils/guestCart";
+import Image from "../../components/ui/Image/Image.jsx";
 import { registerSchema } from "../../validations/registerSchema";
 import AuthInput from "../../components/forms/AuthInput";
 import { addToast } from "../../store/toasts/toastSlice";
@@ -141,7 +142,14 @@ const Register = () => {
             <div className="google-btn">
               <a href={`http://127.0.0.1:8000/login-google`}>
                 <div className="google-icon-holder">
-                  <img src={GOOGLEICON} alt="" />
+                  <Image
+                    src={GOOGLEICON}
+                    alt=""
+                    width={24}
+                    height={24}
+                    sizes="24px"
+                    objectFit="contain"
+                  />
                 </div>
                 <p className="btn-text">
                   <b>Register in with google</b>

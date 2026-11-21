@@ -20,6 +20,7 @@ import axiosErrorHandler from "../../../utils/axiosErrorHandler";
 import Button from "../../../components/ui/Button/Button.jsx";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToast } from "../../../store/toasts/toastSlice";
+import Image from "../../../components/ui/Image/Image.jsx";
 
 const UploadedImagePreview = memo(
   ({ image, index, onDelete, progressRef, containerRef }) => {
@@ -35,12 +36,13 @@ const UploadedImagePreview = memo(
       <div className="border p-3 w-100 rounded img-details" ref={containerRef}>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-2 justify-content-start">
-            <img
+            <Image
               src={imageUrl}
-              style={{ objectFit: "contain" }}
-              width="80px"
-              height="100px"
+              objectFit="contain"
+              width={80}
+              height={100}
               alt={image.name}
+              sizes="80px"
             />
             <div>
               <p className="my-1">{image.name}</p>
@@ -348,10 +350,13 @@ const CreateProduct = () => {
           }}
           onClick={() => showimg.current.click()}
         >
-          <img
+          <Image
             src={uploadimg}
             alt="upload"
-            width={"90px"}
+            width={90}
+            height={90}
+            sizes="90px"
+            objectFit="contain"
             style={{ filter: disable ? "grayscale(1)" : "" }}
           />
           <p

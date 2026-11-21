@@ -36,7 +36,7 @@ export const useProductSearch = (searchParams, enabled = true) => {
       return response.data;
     },
     enabled,
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
     staleTime: 5 * 60 * 1000,
   });
 };

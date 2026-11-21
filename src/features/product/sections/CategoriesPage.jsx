@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Textreplacer } from "../../../utils/TextReplacer";
 import useGetCategories from "../../../hooks/categories/useGetCategories.js";
 import { CategoryCardSkeleton } from "../../../components/skeletons/CategoryCardSkeleton.jsx";
+import Image from "../../../components/ui/Image/Image.jsx";
 
 
 const CategoriesPage = () => {
@@ -14,13 +15,14 @@ const CategoriesPage = () => {
         className="m-1 app-surface border d-flex align-items-center justify-content-start gap-3 rounded p-2 h-100 text-decoration-none"
         to={`/products?category=${c.id}`}
       >
-        <img
+        <Image
           src={c.image}
           alt={c.title}
           width={50}
+          height={50}
           className="rounded"
-          loading="lazy"
-          decoding="async"
+          objectFit="cover"
+          sizes="50px"
         />
         <p className="m-0">{Textreplacer(c.title, 12)}</p>
       </Link>

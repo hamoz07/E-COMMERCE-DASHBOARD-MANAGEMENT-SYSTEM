@@ -19,6 +19,7 @@ import axiosErrorHandler from "../../../utils/axiosErrorHandler";
 import Button from "../../../components/ui/Button/Button.jsx";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToast } from "../../../store/toasts/toastSlice";
+import Image from "../../../components/ui/Image/Image.jsx";
 
 const EditProduct = () => {
   const dispatch = useAppDispatch();
@@ -159,12 +160,13 @@ const EditProduct = () => {
       >
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-2 justify-content-start">
-            <img
+            <Image
               src={URL.createObjectURL(img)}
-              style={{ objectFit: "contain" }}
-              width="80px"
-              height="100px"
+              objectFit="contain"
+              width={80}
+              height={100}
               alt={img.name}
+              sizes="80px"
             />
             <div className="d-flex justify-content-between align-items-start">
               <div>
@@ -202,13 +204,15 @@ const EditProduct = () => {
     return (
       <div className="p-2 col-2 position-relative border" key={i}>
         <div className="d-flex align-items-center justify-content-start">
-          <img
+          <Image
             src={img.image}
             id={img.id}
             className={"w-100"}
             alt={img.name}
-            loading="lazy"
-            decoding="async"
+            width={100}
+            height={100}
+            sizes="(max-width: 768px) 50vw, 16vw"
+            objectFit="cover"
           />
         </div>
         <div className="position-absolute top-0 end-0 bg-danger rounded text-white">
@@ -348,10 +352,13 @@ const EditProduct = () => {
           }}
           onClick={() => showimg.current.click()}
         >
-          <img
+          <Image
             src={uploadimg}
             alt="upload"
-            width={"90px"}
+            width={90}
+            height={90}
+            sizes="90px"
+            objectFit="contain"
             style={{ filter: disable ? "grayscale(1)" : "" }}
           />
           <p

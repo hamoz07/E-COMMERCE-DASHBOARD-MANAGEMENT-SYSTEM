@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { atTypeGenerator } from "../../../utils/dategenerator";
+import Image from "../../../components/ui/Image/Image.jsx";
 
 const TableRow = memo(function TableRow({
   item,
@@ -20,28 +21,27 @@ const TableRow = memo(function TableRow({
         <td key={head.key}>
           {head.key === "images" ? (
             item[head.key].map((src) => (
-              <img
+              <Image
                 key={src.id}
                 src={src.image}
-                loading="lazy"
-                decoding="async"
                 width={70}
                 height={70}
                 alt=""
+                sizes="70px"
+                objectFit="contain"
                 style={{
-                  objectFit: "contain",
                   marginLeft: ".4rem",
                 }}
               />
             ))
           ) : head.key === "image" ? (
-            <img
+            <Image
               src={item[head.key]}
-              loading="lazy"
-              decoding="async"
               width="100"
+              height="100"
               alt=""
-              style={{ objectFit: "contain" }}
+              sizes="100px"
+              objectFit="contain"
             />
           ) : head.key === "created_at" ||
             head.key === "updated_at" ? (

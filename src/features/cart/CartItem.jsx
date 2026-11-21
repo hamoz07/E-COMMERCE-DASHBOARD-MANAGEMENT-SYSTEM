@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/ui/Button/Button.jsx";
+import Image from "../../components/ui/Image/Image.jsx";
 
 const CartItem = memo(
   ({
@@ -46,14 +47,14 @@ const CartItem = memo(
       >
         <div className="cart-item__details">
           {img && (
-            <img
+            <Image
               className="cart-item__image"
               src={img}
               alt={title || "Product"}
               width={64}
               height={64}
-              loading="lazy"
-              decoding="async"
+              sizes="64px"
+              objectFit="cover"
             />
           )}
           <div className="cart-item__summary">

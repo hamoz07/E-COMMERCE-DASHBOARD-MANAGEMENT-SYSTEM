@@ -1,9 +1,9 @@
 // LatestSaleProduct.jsx
-import ProductListSection from "../components/ProductListSection.jsx";
 import { SALEPROD } from "../../../api/endpoints.js";
+import ProductListSectionFetcher from "../components/ProductListSectionFetcher.jsx";
 
 const LatestSaleProduct = () => (
-  <ProductListSection endpoint={SALEPROD} queryKey="sale" size={3} skeletonCount={8} />
+  <ProductListSectionFetcher endpoint={SALEPROD} queryKey="sale" size={3} skeletonCount={8} />
 );
 
 export default LatestSaleProduct;

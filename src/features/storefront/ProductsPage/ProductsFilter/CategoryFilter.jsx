@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import useGetCategories from "../../../../hooks/categories/useGetCategories.js";
+import Button from "../../../../components/ui/Button/Button.jsx";
 
 const INITIAL_CATEGORY_COUNT = 5;
 const CATEGORY_INCREMENT = 5;
@@ -30,6 +31,8 @@ const CategoryFilter = ({ value, onChange }) => {
         categories.length,
       );
 
+      console.log(nextCount)
+
       if (nextCount === categories.length) {
         setHasShownAll(true);
       }
@@ -44,6 +47,8 @@ const CategoryFilter = ({ value, onChange }) => {
         count - CATEGORY_INCREMENT,
         INITIAL_CATEGORY_COUNT,
       );
+
+      console.log(nextCount)
 
       if (nextCount === INITIAL_CATEGORY_COUNT) {
         setHasShownAll(false);
@@ -106,22 +111,24 @@ const CategoryFilter = ({ value, onChange }) => {
       ))}
 
       {hasMoreCategories && (
-        <button
-          className="btn btn-link btn-sm p-0"
-          type="button"
+        <Button
+          variant="link"
+          className="btn-sm p-0 d-flex align-items-center mx-auto"
+          
           onClick={showMore}
         >
           Show more
-        </button>
+        </Button>
       )}
       {visibleCount > INITIAL_CATEGORY_COUNT && (
-        <button
-          className="btn btn-link btn-sm p-0"
-          type="button"
+        <Button
+             variant="link"
+          className="btn-sm p-0 d-flex align-items-center mx-auto"
+          
           onClick={showLess}
         >
           Show less
-        </button>
+        </Button>
       )}
     </fieldset>
   );

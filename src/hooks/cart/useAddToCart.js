@@ -14,8 +14,8 @@ const useAddToCart = (prodId, providedProduct = null) => {
   const [count, setCount] = useState(1);
   const [cartError, setCartError] = useState("");
 
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const guestCartItems = useAppSelector((state) => state.cart.items);
   const { currentUser } = useCurrentUser();
@@ -110,7 +110,9 @@ const useAddToCart = (prodId, providedProduct = null) => {
       );
       setCartError("");
       resetCount();
-      navigate("/cart", { state: { backgroundLocation: location } });
+      navigate("/cart", {
+        state: { backgroundLocation: location, openCartModal: true },
+      });
       return;
     }
 
@@ -127,7 +129,9 @@ const useAddToCart = (prodId, providedProduct = null) => {
           );
           setCartError("");
           resetCount();
-          navigate("/cart", { state: { backgroundLocation: location } });
+          navigate("/cart", {
+            state: { backgroundLocation: location, openCartModal: true },
+          });
         },
         onError: (error) => {
           const validationErrors = error.response?.data?.errors;

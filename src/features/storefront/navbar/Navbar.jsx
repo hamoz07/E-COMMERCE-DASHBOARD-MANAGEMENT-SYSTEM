@@ -55,7 +55,11 @@ const Navbar = () => {
             <ThemeToggle />
             <Link
               to="/cart"
-              state={pathname === "/cart" ? undefined : { backgroundLocation: location }}
+              state={
+                pathname === "/cart"
+                  ? undefined
+                  : { backgroundLocation: location, openCartModal: true }
+              }
               aria-label="View cart"
             >
       <FontAwesomeIcon icon={faCartShopping} className="fs-4"  />

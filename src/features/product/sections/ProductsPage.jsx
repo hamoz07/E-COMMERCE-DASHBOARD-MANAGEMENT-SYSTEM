@@ -23,7 +23,7 @@ const ProductsPage = () => {
   const hasSearchIntent = Boolean(searchQuery);
 
   const filters = {
-    category: categoryIds,
+    category:categoryIds,
     rating: searchParams.get("rating") || "",
     min_price: searchParams.get("min_price") || "",
     max_price: searchParams.get("max_price") || "",
@@ -142,7 +142,7 @@ const ProductsPage = () => {
             products={displayedProducts}
             isLoading={isLoading}
             isError={isError}
-            size={9}
+            size={hasSearchIntent ? 4 : 3}
             skeletonCount={8}
           />
 

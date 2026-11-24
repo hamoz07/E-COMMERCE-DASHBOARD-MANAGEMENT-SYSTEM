@@ -42,7 +42,9 @@ const EditProduct = lazyWithMinDelay(() => import("../features/dashboard/product
 
 const AppRouter = () => {
   const location = useLocation();
-  const backgroundLocation = location.state?.backgroundLocation;
+  const backgroundLocation = location.state?.openCartModal
+    ? location.state.backgroundLocation
+    : null;
 
   return (
     <>

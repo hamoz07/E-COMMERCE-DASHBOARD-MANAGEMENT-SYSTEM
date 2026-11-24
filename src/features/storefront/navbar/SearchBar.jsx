@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../components/ui/Button/Button";
-import { useDebounce } from "../../../hooks/useDebounce.js";
 
 const SEARCH_PAGE = "/products";
 const SINGLE_PRODUCT_PREFIX = "/product/";
@@ -13,36 +12,9 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const urlQuery = searchParams.get("q") || "";
   const [inputValue, setInputValue] = useState(urlQuery);
-  const debouncedValue = useDebounce(inputValue, 400);
 
   const isOnSearchPage = pathname.startsWith(SEARCH_PAGE);
   const isOnSingleProduct = pathname.startsWith(SINGLE_PRODUCT_PREFIX);
-
-  useEffect(() => {
-    if (debouncedValue === urlQuery) return;
-
-    if (!isOnSearchPage) {
-      if (!debouncedValue.trim()) {
-        setInputValue("");
-      }
-      return;
-    }
-
-    const next = new URLSearchParams(searchParams);
-    if (debouncedValue.trim()) {
-      next.set("q", debouncedValue.trim());
-    } else {
-      next.delete("q");
-    }
-    next.delete("page");
-    setSearchParams(next);
-  }, [
-    debouncedValue,
-    isOnSearchPage,
-    searchParams,
-    setSearchParams,
-    urlQuery,
-  ]);
 
   useEffect(() => {
     if (isOnSearchPage || urlQuery) {
@@ -65,15 +37,12 @@ const SearchBar = () => {
     }
 
     if (isOnSearchPage) {
-      console.log("running here")
-      const next = new URLSearchParams(searchParams);
-      if (nextQuery) {
-        next.set("q", nextQuery);
-      } else {
-        next.delete("q");
-      }
-      next.delete("page");
-      setSearchParams(next);
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.set("q", nextQuery);
+      nextParams.delete("category");
+      nextParams.delete("category[]");
+      nextParams.delete("page");
+      setSearchParams(nextParams);
       return;
     }
 
